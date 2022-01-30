@@ -28,8 +28,8 @@ def riffleshuffle(deck, perfect=True):
 
     deck: an iterable to shuffle
     perfect: if True, split deck exactly in half and alternate perfectly
-             between them. If False, split approximately in half adn take 1 to
-             5 cards (randomly) each time.
+             between them. If False, split approximately in half and take 1 to
+             several cards each time.
     """
 
     deck = list(deck)
