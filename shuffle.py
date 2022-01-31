@@ -28,6 +28,8 @@ def stackshuffle(deck, stack_count=5):
     for n, card in enumerate(deck):
         stacks[n%stack_count].append(card)
 
+    # put stacks in random order
+    random.shuffle(stacks)
     r = []
     for s in stacks:
         r.extend(s)
