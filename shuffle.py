@@ -8,7 +8,6 @@ specifics of the algorithms stem from how I shuffle in real life and are not
 intended to be "fair" or "truly random" or anything like that.
 """
 
-
 import itertools, random
 
 def stackshuffle(deck, stack_count=5):
@@ -40,7 +39,7 @@ def riffleshuffle(deck, perfect=False):
     from the bottom of each stack, alternating.
 
     deck: an iterable to shuffle
-    perfect: if True, split deck exactly in half and take one card at a time alterinating
+    perfect: if True, split deck exactly in half and take one card at a time alternating
              between the halves while riffling. If False, split the deck
              approximately in half and take 1 to several cards from each half
              while riffling.
@@ -90,11 +89,21 @@ def overhand(deck):
 
     # Picking a few cards at a time, place cards from clump on top of deck
     while clump:
-        print('pickin')
         how_many = random.randint(1, min(len(clump), 5))
-        print(how_many)
         for _ in range(how_many):
-            deck.insert(0, clump.pop(0))
+            deck.insert(0, clump.pop())
+
+    return deck
+
+
+def repeat(n, function, deck):
+    """Shuffle a deck n times with a particular shuffle function.
+
+    Does not support function args other than deck
+    """
+
+    for _ in range(n):
+        deck = function(deck)
 
     return deck
 
