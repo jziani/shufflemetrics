@@ -1,8 +1,21 @@
+"""This file implements several shuffling techniques. For descriptions of
+the different types of shuffle, see https://en.wikipedia.org/wiki/Shuffling
+
+These function simulate how I personally shuffle my deck when playing Dominion,
+a game where deck sizes vary over the course of the game and usually contain at
+least 10 cards. The constants ("magic numbers") in these functions and the
+specifics of the algorithms stem from how I shuffle in real life and are not
+intended to be "fair" or "truly random" or anything like that.
+"""
+
+
 import itertools, random
 
 def stackshuffle(deck, stack_count=5):
     """Stack shuffle: place cards from deck one by one into stack_count stacks,
     then put the stacks on top of each other to produce a new deck.
+
+    This is also called pile shuffling.
 
     deck: an iterable to shuffle
     stack_count: how many stacks to split the deck into
@@ -22,14 +35,15 @@ def stackshuffle(deck, stack_count=5):
 
     return r
 
-def riffleshuffle(deck, perfect=True):
+def riffleshuffle(deck, perfect=False):
     """Shuffle by splitting a deck in two, assemble a new deck by taking a card
     from the bottom of each stack, alternating.
 
     deck: an iterable to shuffle
-    perfect: if True, split deck exactly in half and alternate perfectly
-             between them. If False, split approximately in half and take 1 to
-             several cards each time.
+    perfect: if True, split deck exactly in half and take one card at a time alterinating
+             between the halves while riffling. If False, split the deck
+             approximately in half and take 1 to several cards from each half
+             while riffling.
     """
 
     deck = list(deck)
@@ -42,7 +56,7 @@ def riffleshuffle(deck, perfect=True):
     h1, h2 = deck[:midpoint], deck[midpoint:]
 
     bottom_half = h1
-    r = []
+    r = [] # The shuffled deck
 
     while len(h1) or len(h2):
         r.append(bottom_half.pop())
@@ -58,3 +72,29 @@ def riffleshuffle(deck, perfect=True):
             bottom_half = h1
 
     return r
+
+def overhand(deck):
+    """Shuffle by pulling a clump of cards from the middle of the deck. From
+    this clump, take a few cards off the top of the clump and put them on top
+    of the deck. Repeat.
+    """
+
+    deck = list(deck)
+
+    # Pull a clump of cards from the middle of the deck
+    clump_top = random.randint(1, len(deck)//2)
+    clump_bottom = random.randint(clump_top+1, len(deck)-1)
+
+    clump = deck[clump_top:clump_bottom]
+    deck = deck[:clump_top] + deck[clump_bottom:]
+
+    # Picking a few cards at a time, place cards from clump on top of deck
+    while clump:
+        print('pickin')
+        how_many = random.randint(1, min(len(clump), 5))
+        print(how_many)
+        for _ in range(how_many):
+            deck.insert(0, clump.pop(0))
+
+    return deck
+
