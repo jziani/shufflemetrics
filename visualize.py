@@ -19,15 +19,14 @@ header = '''<!DOCTYPE html>
   border: solid;
   border-color: black;
   border-width: thick;
-  display: table;
+  display: inline-block;
   margin: 0.25em;
-  float: left;
 }
 </style></head><body>'''
 
 footer = '</body></html>'
 
-def html_out(hues):
+def hues2html(hues):
     out = []
 
     block_template = '<div class="rectangle" style="background-color: hsl({}, 100%, 50%);"></div>'
