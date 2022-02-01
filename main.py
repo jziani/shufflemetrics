@@ -16,6 +16,14 @@ html.append("<p>after another riffle shuffle:</p>")
 deck = shuffle.riffleshuffle(deck)
 html.append(visualize.hues2html([card[1] for card in deck]))
 
+html.append("<p>after third riffle shuffle:</p>")
+deck = shuffle.riffleshuffle(deck)
+html.append(visualize.hues2html([card[1] for card in deck]))
+
+html.append("<p>after fourth riffle shuffle:</p>")
+deck = shuffle.riffleshuffle(deck)
+html.append(visualize.hues2html([card[1] for card in deck]))
+
 html.append(visualize.footer)
 print(''.join(html))
 
