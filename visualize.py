@@ -9,11 +9,31 @@ def make_hues(n):
 
     return hues
 
+header = '''<!DOCTYPE html>
+    <html>
+    <head>
+    <style>
+.rectangle {
+  height: 3em;
+  width: 2em;
+  border: solid;
+  border-color: black;
+  border-width: thick;
+  display: table;
+  margin: 0.25em;
+  float: left;
+}
+</style></head><body>'''
+
+footer = '</body></html>'
+
 def html_out(hues):
-    block_template = '<font style="color:hsl({}, 100%, 50%)">█</font>'
     out = []
+
+    block_template = '<div class="rectangle" style="background-color: hsl({}, 100%, 50%);"></div>'
 
     for hue in hues:
         out.append(block_template.format(hue))
 
     return ''.join(out)
+
