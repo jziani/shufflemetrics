@@ -14,13 +14,13 @@ header = '''<!DOCTYPE html>
     <head>
     <style>
 .rectangle {
-  height: 3em;
-  width: 2em;
+  height: 2.5vw;
+  width: 1.25vw;
   border: solid;
   border-color: black;
-  border-width: thick;
+  border-width: medium;
   display: inline-block;
-  margin: 0.25em;
+  margin: 0.25vw;
 }
 </style></head><body>'''
 
