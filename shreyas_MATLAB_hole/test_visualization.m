@@ -1,5 +1,5 @@
 %% description
-
+% This script tests visualization of shuffles. Thanks Chat GPT!
 clear ; clc ;
 %%
 % Define the suits and ranks
@@ -23,13 +23,16 @@ end
 % or load the best shuffle
 % load('best_shuffle.mat')
 
+% a random shuffle
+shuffle = randperm(52) ;
+
 deck = deck(shuffle) ;
 
 % save('best_shuffle.mat','shuffle')
 
 %%
 % Create a figure
-figure(1);
+figure(1); clf ;
 hold on;
 axis equal;
 axis tight;

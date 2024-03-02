@@ -4,12 +4,31 @@
 % Authors: ChatGPT and Shreyas Kousik, but mostly ChatGPT
 % Created: 2 Mar 2023
 
+%% user parameters
+% what kind of shuffle to use
+shuffle_type = 'best' ; % choose 'best', 'random', 'unshuffled', 'reverse', or 'value'
+
 %% setup
 % Generate a deck of cards represented as integers between 1 and 52
-deck = randperm(52);
+deck = 1:52 ;
+
+% shuffle the deck
+switch shuffle_type
+    case 'best'
+        load('best_shuffle.mat')
+        deck = deck(shuffle) ;
+    case 'random'
+        deck = deck(randperm(52)) ;
+    case 'reverse'
+        deck = deck(end:-1:1) ;
+    case 'value'
+        error('Shreyas hasn''t implemented this yet!')
+    otherwise
+        disp('Jeez just pick a valid shuffle type man!')
+end
 
 % play warrrr
-playWar(deck) ;
+playWar(deck) 
 
 %% how many turns do games of war usually take?
 n_trials = 10000 ;
